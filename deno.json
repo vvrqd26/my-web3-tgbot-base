@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "start:test": "deno run -A --unstable --watch ./testmain.ts"
+  }
+}

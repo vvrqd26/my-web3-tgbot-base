@@ -1,0 +1,4 @@
+.env
+.storage*
+testmain.ts
+.deno*
