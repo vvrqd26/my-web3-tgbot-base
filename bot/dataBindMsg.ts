@@ -1,4 +1,4 @@
-import { bot } from "./index.ts"
+import { bot } from "./bot.ts"
 import { EditMessageTextOptions } from "npm:@types/node-telegram-bot-api"
 export class DataBindMsg<T> {
   protected msgId?:number
