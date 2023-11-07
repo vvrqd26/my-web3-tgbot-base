@@ -1,5 +1,8 @@
 {
   "tasks": {
     "start:test": "deno run -A --unstable --watch ./testmain.ts"
+  },
+  "imports": {
+    "botbase": "https://raw.githubusercontent.com/vvrqd26/my-web3-tgbot-base/master/index.ts"
   }
 }
