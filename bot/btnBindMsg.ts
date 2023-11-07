@@ -1,4 +1,4 @@
-import { CallbackQuery, EditMessageTextOptions, SendMessageOptions } from "npm:@types/node-telegram-bot-api";
+import { CallbackQuery, EditMessageTextOptions } from "npm:@types/node-telegram-bot-api";
 import { DataBindMsg } from "./dataBindMsg.ts";
 
 export interface IBtn {

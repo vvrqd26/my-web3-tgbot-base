@@ -1,4 +1,4 @@
-export default [
+export const erc20withMintAbi = [
   {
     "inputs": [],
     "stateMutability": "nonpayable",
