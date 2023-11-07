@@ -1,4 +1,4 @@
 .env
 .storage*
 testmain.ts
-.deno*
+deno*
