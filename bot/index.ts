@@ -1,9 +1,11 @@
-import { BtnBindMsg } from './btnBindMsg.ts'
-import { DataBindMsg } from './dataBindMsg.ts'
+import { BtnBindMsg,CreateBtnAndDataBindMsg } from './btnBindMsg.ts'
+import { DataBindMsg,createBindDataMsg } from './dataBindMsg.ts'
 import { bot } from './bot.ts'
 
 export {
   bot,
   BtnBindMsg,
-  DataBindMsg
+  DataBindMsg,
+  createBindDataMsg,
+  CreateBtnAndDataBindMsg
 }
