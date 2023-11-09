@@ -1,3 +1,3 @@
-export {DataBindMsg} from './dataBindMsg.ts'
-export {BtnBindMsg} from './btnBindMsg.ts'
-export {bot} from './bot.ts'
+export * from './dataBindMsg.ts'
+export * from './btnBindMsg.ts'
+export * from './bot.ts'
