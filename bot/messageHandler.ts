@@ -1,4 +1,11 @@
-import { CallbackQuery, Message,SendMessageOptions,EditMessageTextOptions } from "npm:@types/node-telegram-bot-api";
+import { ReactNode } from "npm:@types/react";
+import { KeyboardButton,Message,SendMessageOptions,EditMessageTextOptions,EditMessageReplyMarkupOptions,CallbackQuery } from "npm:@types/node-telegram-bot-api";
 
-export type MessageHandler = (message: Message) => React.JSX.Element|[React.JSX.Element,SendMessageOptions|EditMessageTextOptions]
-export type CallbackHandler = (callbackQuery: CallbackQuery) => React.JSX.Element|[React.JSX.Element,SendMessageOptions|EditMessageTextOptions]
+export type MessageOptions = SendMessageOptions|EditMessageTextOptions|EditMessageReplyMarkupOptions;
+export type HandlerReturn<o extends MessageOptions> = {
+    node: ReactNode,
+    btns?: KeyboardButton[][],
+    opts?: o
+}
+export type MessageHandler<o extends MessageOptions = SendMessageOptions> = (msg:Message) => Promise<HandlerReturn<o>>
+export type CallbackHandler<o extends MessageOptions = SendMessageOptions> = (msg:CallbackQuery) => Promise<HandlerReturn<o>>

@@ -1,5 +1,3 @@
-// @deno-types=npm:@types/node-telegram-bot-api
-import Bot, { Message } from "npm:node-telegram-bot-api";
 // @deno-types=npm:@types/react
 import {
   FC,
@@ -9,6 +7,7 @@ import {
   ReactElement,
   ReactNode,
 } from "npm:react";
+import type { TGHTMLTag } from "./types.d.ts";
 
 export const render = (node: ReactNode) => {
   if (node === undefined || node === null) {
@@ -27,7 +26,7 @@ export const render = (node: ReactNode) => {
 };
 
 const renderElement = (
-  o: ReactElement<PropsWithChildren, string | JSXElementConstructor<any>>,
+  o: ReactElement<PropsWithChildren, TGHTMLTag | JSXElementConstructor<PropsWithChildren<{href?:string}>>>,
 ) => {
   const { type, props } = o;
   if (typeof type === "string") {
@@ -36,31 +35,18 @@ const renderElement = (
   return renderComponent(type, props);
 };
 
-// deno-lint-ignore no-explicit-any
-function renderHTMLTag(type: string, props: PropsWithChildren<any>): string {
-  type TGHTMLTag =
-    | "div"
-    | "a"
-    | "b"
-    | "strong"
-    | "i"
-    | "em"
-    | "u"
-    | "ins"
-    | "s"
-    | "strike"
-    | "del"
-    | "span"
-    | "tg-emoji"
-    | "tg-spoiler"
-    | "code"
-    | "pre";
+function renderHTMLTag(type: TGHTMLTag, props: PropsWithChildren<{href?:string}>): string {
+
 
   switch (type) {
     case "div":
       return `${renderChildren(props.children)}\n`;
     case "a":
       return `<a href="${props.href}">${renderChildren(props.children)}</a>`;
+    case "br":
+        return `\n`
+    case "address":
+      return `<tg-spoiler>${renderChildren(props.children)}</tg-spoiler>`
     default:
       return  `<${type}>${renderChildren(props.children)}<${type}/>`;
   }
@@ -73,9 +59,9 @@ function renderChildren(children: ReactNode): string {
   return render(children);
 }
 function renderComponent(
-  node: JSXElementConstructor<any>,
+  node: JSXElementConstructor<PropsWithChildren<{href?:string}>>,
   props: unknown,
 ): string {
-  const o = (node as FC)(props as any);
+  const o = (node as FC)(props as PropsWithChildren<{href?:string}>);
   return render(o);
 }
