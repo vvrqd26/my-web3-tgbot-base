@@ -1,5 +1,5 @@
 import moment from "https://deno.land/x/momentjs@2.29.1-deno/mod.ts";
-export default {
+export const logger = {
   info: function(...args: any[]) {
     return console.info(moment(Date.now()).format('YY/MM/DD HH:mm:ss'),...args);
   },
