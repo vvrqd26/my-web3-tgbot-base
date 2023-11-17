@@ -40,7 +40,7 @@ function renderHTMLTag(type: TGHTMLTag, props: PropsWithChildren<{href?:string}>
 
   switch (type) {
     case "div":
-      return `${renderChildren(props.children)}\n`;
+      return `\n${renderChildren(props.children)}\n`;
     case "a":
       return `<a href="${props.href}">${renderChildren(props.children)}</a>`;
     case "br":
@@ -48,7 +48,7 @@ function renderHTMLTag(type: TGHTMLTag, props: PropsWithChildren<{href?:string}>
     case "address":
       return `<tg-spoiler>${renderChildren(props.children)}</tg-spoiler>`
     default:
-      return  `<${type}>${renderChildren(props.children)}<${type}/>`;
+      return  `<${type}>${renderChildren(props.children)}</${type}>`;
   }
 }
 

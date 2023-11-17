@@ -4,6 +4,19 @@ import { render } from "./render.ts";
 
 export type updateParams = 'self'|{messageID:number,chatID:number}
 
+export const startWith = (path: string) => {
+    return new RegExp(`^${path}`)
+}
+export const equal = (path: string) => {
+    return new RegExp(`^${path}$`)
+}
+
+/**
+ * 绑定command
+ * @param path 
+ * @param handler 
+ * @param update 
+ */
 export function command (   
     path: RegExp,
     handler: MessageHandler,
@@ -37,6 +50,12 @@ export function command (
         }
     });
 }
+/**
+ * 绑定callback
+ * @param data 
+ * @param handler 
+ * @param update 
+ */
 export function callback (
     data: RegExp,
     handler: CallbackHandler,
@@ -69,4 +88,33 @@ export function callback (
             });
         }
     })
+}
+/**
+ * 同时绑定command和callback
+ * @param to 
+ * @param handler 
+ * @param update 
+ */
+export const commandAndCallback = (to:RegExp,handler:ICommandAndCallbackHandler, update?:updateParams) => {
+    command(to, handler.command, update)
+    callback(to, handler.callback, update)
+}
+
+/**
+ * 解析参数字符串
+ * @param commandStr 
+ * @returns 
+ */
+export function parseCommand(commandStr:string) {
+    const arr = commandStr.split(':');
+    const [command, ...args] = arr;
+    return {
+        command,
+        args,
+    }
+}
+
+export interface ICommandAndCallbackHandler {
+    command: MessageHandler,
+    callback: CallbackHandler    
 }
