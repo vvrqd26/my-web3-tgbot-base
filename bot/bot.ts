@@ -9,7 +9,7 @@ if (!BOT_TOKEN) {
 export const bot = Deno.env.get('WEB_HOOK') ? new Bot(BOT_TOKEN,{
   webHook: {
     host: WEB_HOOK,
-    port: 443
+    port: Number(Deno.env.get('WEB_HOOK_PORT') ?? 443)
   },
 }): new Bot(BOT_TOKEN, { polling: true });
 bot.setMyCommands([
