@@ -5,7 +5,7 @@ export interface IBaseContext {
     chatID: number
 }
 
-export const get = async <C extends IBaseContext>(chatID:number,keys:Array<keyof C>) => {
+export const get = async <C>(chatID:number,keys:Array<keyof (C)>) => {
     const res:Partial<C> = {}
     await Promise.all(keys.map(async key=> {
         const v = (await  db.get(['context',chatID,key as string|number])).value
@@ -13,7 +13,7 @@ export const get = async <C extends IBaseContext>(chatID:number,keys:Array<keyof
     })) 
     return res
 }
-export const set = <C extends IBaseContext>(chatID:number,ctx:Partial<C>)=> {
+export const set = <C>(chatID:number,ctx:Partial<C>)=> {
     for (const key in ctx) {
         db.set(['context',chatID,key],ctx[key])
     }

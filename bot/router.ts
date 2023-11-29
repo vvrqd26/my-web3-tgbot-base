@@ -29,6 +29,7 @@ export function command (
                 ...opts,
                 reply_markup: {
                     inline_keyboard: btns ?? [],
+                    ...opts?.reply_markup
                 },
                 ...(update === 'self' ? {
                     message_id: msg.message_id,
@@ -44,6 +45,7 @@ export function command (
                 ...opts,
                 reply_markup: {
                     inline_keyboard: btns ?? [],
+                    ...opts?.reply_markup
                 },
                 parse_mode: 'HTML',
             });
@@ -78,13 +80,15 @@ export function callback (
                     chat_id: update.chatID,
                 }),
                 parse_mode: 'HTML'
+                
             });
         } else {
             bot.sendMessage(msg.from.id, render(node),{
                 ...opts,
                 reply_markup: {
                     inline_keyboard: btns ?? [],
-                }
+                    ...opts?.reply_markup,
+                },
             });
         }
     })
