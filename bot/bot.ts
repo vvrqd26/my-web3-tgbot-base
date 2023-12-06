@@ -12,9 +12,6 @@ export const bot = Deno.env.get('WEB_HOOK') ? new Bot(BOT_TOKEN,{
     port: Number(Deno.env.get('WEB_HOOK_PORT') ?? 443)
   },
 }): new Bot(BOT_TOKEN, { polling: true });
-bot.setMyCommands([
-  { command: "start", description: "Start the bot" },
-])
 if (WEB_HOOK) {
   console.log('web hook start',WEB_HOOK)
 }
